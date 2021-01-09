@@ -10,8 +10,12 @@
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/index.js"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/axelkr/solid-barnacle.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Axel",
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^11.1.1",
