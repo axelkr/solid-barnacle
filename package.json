@@ -5,11 +5,12 @@
   "main": "dist/app.js",
   "scripts": {
     "ng": "ng",
+    "electron": "node_modules/electron/dist/electron",
     "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "start:electron": "ng build --base-href ./ && electron dist/app.js",
+    "start:electron": "ng build --base-href ./ && node_modules/electron/dist/electron dist/app.js",
     "make": "ng build --prod --base-href ./ && electron-forge make"
   },
   "repository": {
