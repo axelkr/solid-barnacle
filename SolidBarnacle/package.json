@@ -11,8 +11,8 @@
     "start": "npm run build && electron ./dist/index.js"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/axelkr/solid-barnacle.git"
+    "type": "git",
+    "url": "https://github.com/axelkr/solid-barnacle.git"
   },
   "keywords": [],
   "author": "Axel",
