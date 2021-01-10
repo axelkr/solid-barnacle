@@ -1,7 +1,7 @@
 {
   "name": "solid-barnacle",
   "version": "0.1.0",
-  "description": "some description",
+  "description": "some description.",
   "main": "dist/app.js",
   "scripts": {
     "ng": "ng",
