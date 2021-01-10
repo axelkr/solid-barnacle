@@ -25,9 +25,6 @@ const {
       })
     );
   
-    // Initialize the DevTools.
-    appWindow.webContents.openDevTools()
-  
     appWindow.on('closed', function () {
       appWindow = null
     })
