@@ -4,8 +4,7 @@ module.exports = {
       {
         "name": "@electron-forge/maker-squirrel",
         "config": {
-          "name": "KanbanTracking",
-          "exe" : "KanbanTracking"
+          "name": "KanbanTracking"
         }
       },
       {
