@@ -28,4 +28,5 @@ An event occurs at some point. To avoid problems with keeping time between front
 ### Object event
 * extends Generic event
 * Object : GUID (non-null)
+* ObjectType : String
 * Payload: JSON
