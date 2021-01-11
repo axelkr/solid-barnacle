@@ -66,23 +66,6 @@
     "@typescript-eslint/parser": "4.3.0"
   },
   "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "solid_barnacle"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "platforms": [
-            "linux"
-          ],
-          "config": {}
-        }
-      ]
-    }
+    "forge": "./electron.forge.config.js"
   }
 }

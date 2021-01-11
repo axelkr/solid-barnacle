@@ -2,6 +2,10 @@ const {
     app,
     BrowserWindow
   } = require('electron')
+
+  // early out in case of app start during installation on Windows
+  if (require('electron-squirrel-startup')) return app.quit();
+
   const url = require("url");
   const path = require("path");
   
