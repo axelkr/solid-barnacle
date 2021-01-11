@@ -17,7 +17,8 @@ const {
       height: 800,
       webPreferences: {
         nodeIntegration: true
-      }
+      },
+      icon:"assets/applicationIcon.png"
     })
   
     // Electron Build Path
