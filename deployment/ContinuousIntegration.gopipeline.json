@@ -45,8 +45,7 @@
               "command": "npm",
               "timeout": -1.0,
               "arguments": [
-                "install",
-                "-g"
+                "install"
               ],
               "run_if": "passed",
               "type": "exec"
@@ -90,8 +89,7 @@
               "command": "npm",
               "timeout": -1.0,
               "arguments": [
-                "install",
-                "-g"
+                "install"
               ],
               "run_if": "passed",
               "type": "exec"
@@ -120,8 +118,7 @@
               "command": "npm",
               "timeout": -1.0,
               "arguments": [
-                "install",
-                "-g"
+                "install"
               ],
               "run_if": "passed",
               "type": "exec"
