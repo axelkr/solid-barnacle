@@ -99,7 +99,7 @@
               "timeout": -1.0,
               "arguments": [
                 "run",
-                "test"
+                "testCLI"
               ],
               "run_if": "passed",
               "type": "exec"
