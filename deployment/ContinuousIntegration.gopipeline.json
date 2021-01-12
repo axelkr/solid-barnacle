@@ -82,7 +82,13 @@
           "environment_variables": [],
           "tabs": [],
           "resources": [],
-          "artifacts": [],
+          "artifacts": [
+            {
+              "source": "testResults/**/TESTS-*.xml",
+              "destination": "testoutput",
+              "type": "test"
+            }
+          ],
           "timeout": 5.0,
           "tasks": [
             {
