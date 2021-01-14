@@ -3,7 +3,7 @@
   "name": "ContinuousIntegration",
   "display_order_weight": -1.0,
   "label_template": "${COUNT}",
-  "lock_behavior": "none",
+  "lock_behavior": "unlockWhenFinished",
   "environment_variables": [],
   "parameters": [],
   "materials": [
@@ -82,7 +82,13 @@
           "environment_variables": [],
           "tabs": [],
           "resources": [],
-          "artifacts": [],
+          "artifacts": [
+            {
+              "source": "testResults/**/TESTS-*.xml",
+              "destination": "testoutput",
+              "type": "test"
+            }
+          ],
           "timeout": 5.0,
           "tasks": [
             {
@@ -99,7 +105,7 @@
               "timeout": -1.0,
               "arguments": [
                 "run",
-                "test"
+                "testCLI"
               ],
               "run_if": "passed",
               "type": "exec"

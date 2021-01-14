@@ -1,6 +1,7 @@
 module.exports = {
     "packagerConfig": {
-      "icon" : "src/assets/applicationIcon"
+      "icon" : "src/assets/applicationIcon",
+      "ignore": ["src/","documentation/","deployment","testResults/",".eslintrc.json",".browserlistrc",".gitignore","karma.conf.js","angular.json"]
     },
     "makers": [
       {
