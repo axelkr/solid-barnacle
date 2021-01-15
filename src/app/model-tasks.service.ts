@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ObjectEvent } from './objectEvent';
 import { Task } from './task';
 import { Observable, of } from 'rxjs';
-import { ObjectStoreBackendService } from './object-store-backend.service';
+import { ObjectStoreBackendService } from './backend/object-store-backend.service';
 import { ObjectEventFactoryService } from './object-event-factory.service';
 import { ProcessCreateTaskService } from './process-create-task.service';
 import { ProcessObjectEventService} from './processObjectEventService';

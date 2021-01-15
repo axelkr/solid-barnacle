@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ObjectEvent } from './objectEvent';
-import { ObjectEventFactoryService } from './object-event-factory.service';
+import { ObjectEvent } from '../objectEvent';
+import { ObjectEventFactoryService } from '../object-event-factory.service';
 
-//const sqlite3 = require('sqlite3').verbose();
+import { open} from 'sqlite';
 
 @Injectable({
   providedIn: 'root'
