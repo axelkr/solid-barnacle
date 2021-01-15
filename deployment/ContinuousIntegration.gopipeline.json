@@ -38,7 +38,13 @@
           "environment_variables": [],
           "tabs": [],
           "resources": [],
-          "artifacts": [],
+          "artifacts": [
+            {
+              "source": "testResults/**/TESTS-*.xml",
+              "destination": "testoutput",
+              "type": "test"
+            }
+          ],
           "timeout": 0.0,
           "tasks": [
             {
@@ -59,43 +65,13 @@
               ],
               "run_if": "passed",
               "type": "exec"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "MandatoryQualityControl",
-      "fetch_materials": true,
-      "never_cleanup_artifacts": false,
-      "clean_working_directory": false,
-      "approval": {
-        "type": "success",
-        "users": [],
-        "roles": [],
-        "allow_only_on_success": true
-      },
-      "environment_variables": [],
-      "jobs": [
-        {
-          "name": "UnitTests",
-          "environment_variables": [],
-          "tabs": [],
-          "resources": [],
-          "artifacts": [
-            {
-              "source": "testResults/**/TESTS-*.xml",
-              "destination": "testoutput",
-              "type": "test"
-            }
-          ],
-          "timeout": 5.0,
-          "tasks": [
+            },
             {
               "command": "npm",
               "timeout": -1.0,
               "arguments": [
-                "install"
+                "run",
+                "lint"
               ],
               "run_if": "passed",
               "type": "exec"
@@ -106,35 +82,6 @@
               "arguments": [
                 "run",
                 "testCLI"
-              ],
-              "run_if": "passed",
-              "type": "exec"
-            }
-          ]
-        },
-        {
-          "name": "StaticCodeAnalysis",
-          "environment_variables": [],
-          "tabs": [],
-          "resources": [],
-          "artifacts": [],
-          "timeout": 0.0,
-          "tasks": [
-            {
-              "command": "npm",
-              "timeout": -1.0,
-              "arguments": [
-                "install"
-              ],
-              "run_if": "passed",
-              "type": "exec"
-            },
-            {
-              "command": "npm",
-              "timeout": -1.0,
-              "arguments": [
-                "run",
-                "lint"
               ],
               "run_if": "passed",
               "type": "exec"
