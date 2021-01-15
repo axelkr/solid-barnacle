@@ -12,5 +12,14 @@ export class TaskAddComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  model = {name:'',state:'To Do'};
 
+  onSubmit() { }
+
+  states = ['To Do', 'In Work', 'Done'];
+
+  newTask() : void{
+
+  }
 }
