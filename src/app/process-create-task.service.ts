@@ -7,10 +7,10 @@ import { Task } from './task';
   providedIn: 'root'
 })
 export class ProcessCreateTaskService implements ProcessObjectEventService {
+  readonly objectEventTypeProcessing: string = 'CreateTask';
 
   constructor() { }
 
-  readonly objectEventTypeProcessing: string = 'CreateTask';
 
   process(objectEvent: ObjectEvent, tasks: Task[]): Task[] {
     let name = objectEvent.payload.get('name');

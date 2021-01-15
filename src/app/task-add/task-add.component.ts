@@ -20,7 +20,7 @@ export class TaskAddComponent implements OnInit {
 
   onSubmit() { }
 
-  newTask() : void {
+  newTask(): void {
     const objectEvent = this.objectEventFactory.constructCreateTaskEvent(this.model.name,this.model.state);
     this.modelTasksService.processObjectEvent(objectEvent);
   }

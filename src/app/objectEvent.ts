@@ -5,6 +5,6 @@ export interface ObjectEvent {
   id: number;
   eventType: string;
   object: string;
-  objectType:string;
-  payload: Map<string,string>
+  objectType: string;
+  payload: Map<string,string>;
 }

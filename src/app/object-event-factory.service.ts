@@ -5,20 +5,20 @@ import { ObjectEvent } from './objectEvent';
   providedIn: 'root'
 })
 export class ObjectEventFactoryService {
-  public readonly currentTopic : string = 'constTopic';
+  public readonly currentTopic: string = 'constTopic';
 
   constructor() { }
 
-  public constructCreateTaskEvent(name:string,state:string) : ObjectEvent {
-    const eventIdDiscardedByBackend : number = 0;
-    let createObjectEvent : ObjectEvent = {
-      'topic' : this.currentTopic,
-      'time' : new Date(),
-      'id' : eventIdDiscardedByBackend,
-      'eventType' : "CreateTask",
-      'object': this.createUUID(),
-      'objectType' : "Task",
-      'payload' : new Map([['name',name],['state',state]])
+  public constructCreateTaskEvent(name: string,state: string) : ObjectEvent {
+    const eventIdDiscardedByBackend: number = 0;
+    let createObjectEvent: ObjectEvent = {
+      topic: this.currentTopic,
+      time: new Date(),
+      id: eventIdDiscardedByBackend,
+      eventType: 'CreateTask',
+      object: this.createUUID(),
+      objectType: 'Task',
+      payload: new Map([['name',name],['state',state]])
     };
     return createObjectEvent;
   }
