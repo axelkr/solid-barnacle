@@ -1,9 +1,4 @@
-<div *ngIf="task">
-
-    <h2>{{task.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{task.id}}</div>
-    <div>
-      <label>name: {{task.name}}</label>
-    </div>
-  
+<div *ngIf="task" class="taskCard">
+  <label>name: {{task.name}}</label>
+  <label>; state: {{task.state}}</label>
   </div>
