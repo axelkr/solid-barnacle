@@ -4,17 +4,25 @@ import { Task } from './task';
 import { Observable, of } from 'rxjs';
 import { ObjectStoreBackendService } from './object-store-backend.service';
 import { ObjectEventFactoryService } from './object-event-factory.service';
+import { ProcessCreateTaskService } from './process-create-task.service';
+import { ProcessObjectEventService} from './processObjectEventService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelTasksService {
   private tasks: Task[];
+  private processors : Map<string,ProcessObjectEventService> = new Map<string,ProcessObjectEventService>();
 
   constructor(private backend: ObjectStoreBackendService, private objectEventFactory : ObjectEventFactoryService) { 
     this.tasks = [];
+    var availableProcessors : ProcessObjectEventService[] = [];
+    availableProcessors.push(new ProcessCreateTaskService());
+
+    availableProcessors.forEach(aService => this.processors.set(aService.objectEventTypeProcessing,aService));
+
     var allEvents = backend.getAllObjectEventsOfTopic(this.objectEventFactory.currentTopic);
-    allEvents.forEach(x => this.processCreateObjectEvent(x));
+    allEvents.forEach(x => this.processObjectEvent(x));
   }
 
   getTasks(): Observable<Task[]> {
@@ -22,26 +30,13 @@ export class ModelTasksService {
   }
 
   public processObjectEvent(objectEvent:ObjectEvent) : void {
-    switch(objectEvent.eventType) {
-      case "CreateTask":
-        this.processCreateObjectEvent(objectEvent);
-        break;
-      default:
-        throw "unknown object event "+objectEvent.eventType;
+    if ( ! this.processors.has(objectEvent.eventType)) {
+      throw "unknown object event "+objectEvent.eventType;
     }
-    this.backend.storeObjectEvent(objectEvent);
-  }
-
-  // TODO: extract service for processing an event
-  private processCreateObjectEvent(objectEvent:ObjectEvent) : void {
-    let name = objectEvent.payload.get('name');
-    if (name === undefined) {
-      name = '';
+    var aProcessor = this.processors.get(objectEvent.eventType);
+    if (aProcessor !== undefined) {
+      this.tasks = aProcessor.process(objectEvent,this.tasks);
+      this.backend.storeObjectEvent(objectEvent);
     }
-    let state = objectEvent.payload.get('state');
-    if (state === undefined) {
-      state = '';
-    }
-    this.tasks.push({id:objectEvent.object,name:name,state:state});
   }
 }
