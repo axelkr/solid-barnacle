@@ -3,12 +3,14 @@ import { ObjectEvent } from './objectEvent';
 import { Task } from './task';
 import { Observable, of } from 'rxjs';
 import { ObjectStoreBackendService } from './object-store-backend.service';
+import { ObjectEventFactory } from './objectEventFactory';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelTasksService {
   private tasks: Task[];
+  private objectEventFactory : ObjectEventFactory = new ObjectEventFactory();
 
   constructor(private backend: ObjectStoreBackendService) { 
     this.tasks = [];
@@ -25,17 +27,7 @@ export class ModelTasksService {
   }
 
   createTask(name:string,state:string) : void {
-    const eventIdDiscardedByBackend : number = 0;
-    let createObjectEvent : ObjectEvent = {
-      'topic' :'constTopic',
-      'time' : new Date(),
-      'id' : eventIdDiscardedByBackend,
-      'eventType' : "CreateTask",
-      'object': this.createUUID(),
-      'objectType' : "Task",
-      'payload' : new Map([['name',name],['state',state]])
-    };
-
+    let createObjectEvent : ObjectEvent = this.objectEventFactory.constructCreateTaskEvent(name,state);
     this.processCreateObjectEvent(createObjectEvent);
     this.backend.storeObjectEvent(createObjectEvent);
   }
@@ -50,12 +42,5 @@ export class ModelTasksService {
       state = '';
     }
     this.tasks.push({id:objectEvent.object,name:name,state:state});
-  }
-
-  private createUUID():string {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
   }
 }
