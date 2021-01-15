@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModelTasksService } from '../model-tasks.service';
 
 @Component({
   selector: 'app-task-add',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskAddComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modelTasksService: ModelTasksService) { }
 
   ngOnInit(): void {
   }
