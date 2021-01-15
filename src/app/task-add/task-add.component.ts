@@ -20,6 +20,6 @@ export class TaskAddComponent implements OnInit {
   states = ['To Do', 'In Work', 'Done'];
 
   newTask() : void{
-
+      this.modelTasksService.createTask(this.model.name,this.model.state);
   }
 }
