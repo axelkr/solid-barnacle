@@ -8,22 +8,20 @@ import { ObjectEventFactoryService } from '../object-event-factory.service';
   styleUrls: ['./task-add.component.less']
 })
 export class TaskAddComponent implements OnInit {
+  model = {name:'',state:'To Do'};
+  states = ['To Do', 'In Work', 'Done'];
 
   constructor(private modelTasksService: ModelTasksService,
-    private objectEventFactory : ObjectEventFactoryService) {
+    private objectEventFactory: ObjectEventFactoryService) {
    }
 
   ngOnInit(): void {
   }
-  
-  model = {name:'',state:'To Do'};
 
   onSubmit() { }
 
-  states = ['To Do', 'In Work', 'Done'];
-
   newTask() : void {
-    var objectEvent = this.objectEventFactory.constructCreateTaskEvent(this.model.name,this.model.state);
+    const objectEvent = this.objectEventFactory.constructCreateTaskEvent(this.model.name,this.model.state);
     this.modelTasksService.processObjectEvent(objectEvent);
   }
 }

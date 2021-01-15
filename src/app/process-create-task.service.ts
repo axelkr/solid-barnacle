@@ -9,10 +9,10 @@ import { Task } from './task';
 export class ProcessCreateTaskService implements ProcessObjectEventService {
 
   constructor() { }
-  
-  readonly objectEventTypeProcessing : string = 'CreateTask';
 
-  process(objectEvent: ObjectEvent, tasks : Task[]) : Task[] {
+  readonly objectEventTypeProcessing: string = 'CreateTask';
+
+  process(objectEvent: ObjectEvent, tasks: Task[]): Task[] {
     let name = objectEvent.payload.get('name');
     if (name === undefined) {
       name = '';
@@ -21,7 +21,7 @@ export class ProcessCreateTaskService implements ProcessObjectEventService {
     if (state === undefined) {
       state = '';
     }
-    tasks.push({id:objectEvent.object,name:name,state:state});
+    tasks.push({id:objectEvent.object,name,state});
     return tasks;
   }
 }
