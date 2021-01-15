@@ -13,17 +13,12 @@ export class ModelTasksService {
 
   constructor(private backend: ObjectStoreBackendService, private objectEventFactory : ObjectEventFactoryService) { 
     this.tasks = [];
-    var allEvents = backend.getAllObjectEventsOfTopic(objectEventFactory.currentTopic);
+    var allEvents = backend.getAllObjectEventsOfTopic(this.objectEventFactory.currentTopic);
     allEvents.forEach(x => this.processCreateObjectEvent(x));
   }
 
   getTasks(): Observable<Task[]> {
     return of(this.tasks);
-  }
-
-  createTask(name:string,state:string) : void {
-    let createObjectEvent : ObjectEvent = this.objectEventFactory.constructCreateTaskEvent(name,state);
-    this.processObjectEvent(createObjectEvent);
   }
 
   public processObjectEvent(objectEvent:ObjectEvent) : void {
