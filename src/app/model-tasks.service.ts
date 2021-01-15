@@ -3,18 +3,17 @@ import { ObjectEvent } from './objectEvent';
 import { Task } from './task';
 import { Observable, of } from 'rxjs';
 import { ObjectStoreBackendService } from './object-store-backend.service';
-import { ObjectEventFactory } from './objectEventFactory';
+import { ObjectEventFactoryService } from './object-event-factory.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelTasksService {
   private tasks: Task[];
-  private objectEventFactory : ObjectEventFactory = new ObjectEventFactory();
 
-  constructor(private backend: ObjectStoreBackendService) { 
+  constructor(private backend: ObjectStoreBackendService, private objectEventFactory : ObjectEventFactoryService) { 
     this.tasks = [];
-    var allEvents = backend.getAllObjectEventsOfTopic('someTopic');
+    var allEvents = backend.getAllObjectEventsOfTopic(objectEventFactory.currentTopic);
     allEvents.forEach(x => this.processCreateObjectEvent(x));
   }
 
@@ -22,14 +21,23 @@ export class ModelTasksService {
     return of(this.tasks);
   }
 
-  // TODO: extract service for processing an event
-  // TODO: don't hardcode topic
   createTask(name:string,state:string) : void {
     let createObjectEvent : ObjectEvent = this.objectEventFactory.constructCreateTaskEvent(name,state);
-    this.processCreateObjectEvent(createObjectEvent);
-    this.backend.storeObjectEvent(createObjectEvent);
+    this.processObjectEvent(createObjectEvent);
   }
 
+  public processObjectEvent(objectEvent:ObjectEvent) : void {
+    switch(objectEvent.eventType) {
+      case "CreateTask":
+        this.processCreateObjectEvent(objectEvent);
+        break;
+      default:
+        throw "unknown object event "+objectEvent.eventType;
+    }
+    this.backend.storeObjectEvent(objectEvent);
+  }
+
+  // TODO: extract service for processing an event
   private processCreateObjectEvent(objectEvent:ObjectEvent) : void {
     let name = objectEvent.payload.get('name');
     if (name === undefined) {

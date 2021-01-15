@@ -1,11 +1,18 @@
+import { Injectable } from '@angular/core';
 import { ObjectEvent } from './objectEvent';
 
-export class ObjectEventFactory {
+@Injectable({
+  providedIn: 'root'
+})
+export class ObjectEventFactoryService {
+  public readonly currentTopic : string = 'constTopic';
+
+  constructor() { }
 
   public constructCreateTaskEvent(name:string,state:string) : ObjectEvent {
     const eventIdDiscardedByBackend : number = 0;
     let createObjectEvent : ObjectEvent = {
-      'topic' :'constTopic',
+      'topic' : this.currentTopic,
       'time' : new Date(),
       'id' : eventIdDiscardedByBackend,
       'eventType' : "CreateTask",

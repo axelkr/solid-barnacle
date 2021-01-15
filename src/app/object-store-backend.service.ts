@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ObjectEvent } from './objectEvent';
-import { ObjectEventFactory } from './objectEventFactory';
+import { ObjectEventFactoryService } from './object-event-factory.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +8,13 @@ import { ObjectEventFactory } from './objectEventFactory';
 export class ObjectStoreBackendService {
   private inMemoryDB : ObjectEvent[] = [];
 
-  constructor() { 
-    var objectEventFactory = new ObjectEventFactory();
-    this.inMemoryDB.push(objectEventFactory.constructCreateTaskEvent('Dr Nice','In Work'));
-    this.inMemoryDB.push(objectEventFactory.constructCreateTaskEvent('Narco','In Work'));
-    this.inMemoryDB.push(objectEventFactory.constructCreateTaskEvent('Bombasto','In Work'));
-    this.inMemoryDB.push(objectEventFactory.constructCreateTaskEvent('Celeritas','In Work'));
-    this.inMemoryDB.push(objectEventFactory.constructCreateTaskEvent('Magneta','In Work'));
-    this.inMemoryDB.push(objectEventFactory.constructCreateTaskEvent('Magma','In Work'));
+  constructor(private objectEventFactory: ObjectEventFactoryService) { 
+    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Dr Nice','In Work'));
+    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Narco','In Work'));
+    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Bombasto','In Work'));
+    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Celeritas','In Work'));
+    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Magneta','In Work'));
+    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Magma','In Work'));
   }
 
   public storeObjectEvent(objectEvent:ObjectEvent) : void {
