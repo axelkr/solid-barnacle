@@ -14,9 +14,9 @@ export class ModelTasksService {
   private tasks: Task[];
   private processors: Map<string,ProcessObjectEventService> = new Map<string,ProcessObjectEventService>();
 
-  constructor(private backend: ObjectStoreBackendService, private objectEventFactory: ObjectEventFactoryService) { 
+  constructor(private backend: ObjectStoreBackendService, private objectEventFactory: ObjectEventFactoryService) {
     this.tasks = [];
-    let availableProcessors: ProcessObjectEventService[] = [];
+    const availableProcessors: ProcessObjectEventService[] = [];
     availableProcessors.push(new ProcessCreateTaskService());
 
     availableProcessors.forEach(aService => this.processors.set(aService.objectEventTypeProcessing,aService));
@@ -31,9 +31,9 @@ export class ModelTasksService {
 
   public processObjectEvent(objectEvent: ObjectEvent): void {
     if ( ! this.processors.has(objectEvent.eventType)) {
-      throw 'unknown object event '+objectEvent.eventType;
+      throw new Error('unknown object event '+objectEvent.eventType);
     }
-    let aProcessor = this.processors.get(objectEvent.eventType);
+    const aProcessor = this.processors.get(objectEvent.eventType);
     if (aProcessor !== undefined) {
       this.tasks = aProcessor.process(objectEvent,this.tasks);
       this.backend.storeObjectEvent(objectEvent);

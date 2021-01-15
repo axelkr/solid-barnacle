@@ -9,9 +9,9 @@ export class ObjectEventFactoryService {
 
   constructor() { }
 
-  public constructCreateTaskEvent(name: string,state: string) : ObjectEvent {
-    const eventIdDiscardedByBackend: number = 0;
-    let createObjectEvent: ObjectEvent = {
+  public constructCreateTaskEvent(name: string,state: string): ObjectEvent {
+    const eventIdDiscardedByBackend = 0;
+    const createObjectEvent: ObjectEvent = {
       topic: this.currentTopic,
       time: new Date(),
       id: eventIdDiscardedByBackend,
@@ -23,7 +23,7 @@ export class ObjectEventFactoryService {
     return createObjectEvent;
   }
 
-  private createUUID():string {
+  private createUUID(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
