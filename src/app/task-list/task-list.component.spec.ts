@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TaskComponent } from '../task/task.component';
 import { TaskListComponent } from './task-list.component';
 
 describe('TaskListComponent', () => {
@@ -8,7 +9,7 @@ describe('TaskListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskListComponent ]
+      declarations: [ TaskListComponent,TaskComponent ]
     })
     .compileComponents();
   });
