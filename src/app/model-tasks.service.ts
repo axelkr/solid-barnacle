@@ -6,22 +6,22 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ModelTasksService {
+  private tasks: Task[] = [
+    { id: 11, name: 'Dr Nice' , state: 'In Work'},
+    { id: 12, name: 'Narco' , state: 'In Work'},
+    { id: 13, name: 'Bombasto' , state: 'In Work'},
+    { id: 14, name: 'Celeritas' , state: 'In Work'},
+    { id: 15, name: 'Magneta' , state: 'In Work'},
+    { id: 16, name: 'RubberMan' , state: 'In Work'},
+    { id: 17, name: 'Dynama' , state: 'In Work'},
+    { id: 18, name: 'Dr IQ' , state: 'In Work'},
+    { id: 19, name: 'Magma' , state: 'In Work'},
+    { id: 20, name: 'Tornado' , state: 'In Work'}
+  ];
 
   constructor() { }
 
   getTasks(): Observable<Task[]> {
-    const mockTasks: Task[] = [
-      { id: 11, name: 'Dr Nice' },
-      { id: 12, name: 'Narco' },
-      { id: 13, name: 'Bombasto' },
-      { id: 14, name: 'Celeritas' },
-      { id: 15, name: 'Magneta' },
-      { id: 16, name: 'RubberMan' },
-      { id: 17, name: 'Dynama' },
-      { id: 18, name: 'Dr IQ' },
-      { id: 19, name: 'Magma' },
-      { id: 20, name: 'Tornado' }
-    ];
-    return of(mockTasks);
+    return of(this.tasks);
   }
 }
