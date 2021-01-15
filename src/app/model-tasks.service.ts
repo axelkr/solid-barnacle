@@ -6,22 +6,25 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ModelTasksService {
-  private tasks: Task[] = [
-    { id: 11, name: 'Dr Nice' , state: 'In Work'},
-    { id: 12, name: 'Narco' , state: 'In Work'},
-    { id: 13, name: 'Bombasto' , state: 'In Work'},
-    { id: 14, name: 'Celeritas' , state: 'In Work'},
-    { id: 15, name: 'Magneta' , state: 'In Work'},
-    { id: 16, name: 'RubberMan' , state: 'In Work'},
-    { id: 17, name: 'Dynama' , state: 'In Work'},
-    { id: 18, name: 'Dr IQ' , state: 'In Work'},
-    { id: 19, name: 'Magma' , state: 'In Work'},
-    { id: 20, name: 'Tornado' , state: 'In Work'}
-  ];
+  private tasks: Task[];
 
-  constructor() { }
+  constructor() { 
+    this.tasks = [];
+    this.createTask('Dr Nice','In Work');
+    this.createTask('Narco','In Work');
+    this.createTask('Bombasto','In Work');
+    this.createTask('Celeritas','In Work');
+    this.createTask('Magneta','In Work');
+    this.createTask('Magma','In Work');
+  }
 
   getTasks(): Observable<Task[]> {
     return of(this.tasks);
+  }
+
+  createTask(name:string,state:string) : void {
+    let newId : number = this.tasks.length;
+
+    this.tasks.push({id:newId,name:name,state:state});
   }
 }
