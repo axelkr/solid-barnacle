@@ -71,7 +71,7 @@
               "timeout": -1.0,
               "arguments": [
                 "run",
-                "lint"
+                "testCLI"
               ],
               "run_if": "passed",
               "type": "exec"
@@ -81,7 +81,7 @@
               "timeout": -1.0,
               "arguments": [
                 "run",
-                "testCLI"
+                "lint"
               ],
               "run_if": "passed",
               "type": "exec"
