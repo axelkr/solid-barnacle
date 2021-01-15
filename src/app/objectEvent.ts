@@ -6,5 +6,5 @@ export interface ObjectEvent {
   eventType : string,
   object: string,
   objectType:string,
-  payload : object
+  payload : Map<string,string>
 }

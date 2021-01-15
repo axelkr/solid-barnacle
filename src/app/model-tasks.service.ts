@@ -33,10 +33,7 @@ export class ModelTasksService {
       'eventType' : "CreateTask",
       'object': this.createUUID(),
       'objectType' : "Task",
-      'payload' : {
-        'name':name,
-        'state':state
-      }
+      'payload' : new Map([['name',name],['state',state]])
     };
 
     this.processCreateObjectEvent(createObjectEvent);
@@ -44,8 +41,14 @@ export class ModelTasksService {
   }
 
   private processCreateObjectEvent(objectEvent:ObjectEvent) : void {
-    let name : string = "objectEvent.payload.name";
-    let state : string = "objectEvent.payload.state";
+    let name = objectEvent.payload.get('name');
+    if (name === undefined) {
+      name = '';
+    }
+    let state = objectEvent.payload.get('state');
+    if (state === undefined) {
+      state = '';
+    }
     this.tasks.push({id:objectEvent.object,name:name,state:state});
   }
 
