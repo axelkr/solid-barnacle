@@ -2,17 +2,14 @@ import { Injectable } from '@angular/core';
 import { ObjectEvent } from '../objectEvent';
 import { ObjectEventFactoryService } from '../object-event-factory.service';
 
-import { open} from 'sqlite';
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class ObjectStoreBackendService {
   private inMemoryDB: ObjectEvent[] = [];
-  //private db: Database;
 
   constructor(private objectEventFactory: ObjectEventFactoryService) {
-    //this.db = new sqlite3.Database(':memory:');
     this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Dr Nice','In Work'));
     this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Narco','In Work'));
     this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Bombasto','In Work'));
