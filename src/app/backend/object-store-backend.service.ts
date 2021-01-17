@@ -1,28 +1,36 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+
 import { ObjectEvent } from '../objectEvent';
-import { ObjectEventFactoryService } from '../object-event-factory.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ObjectStoreBackendService {
-  private inMemoryDB: ObjectEvent[] = [];
 
-  constructor(private objectEventFactory: ObjectEventFactoryService) {
-    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Dr Nice','In Work'));
-    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Narco','In Work'));
-    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Bombasto','In Work'));
-    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Celeritas','In Work'));
-    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Magneta','In Work'));
-    this.inMemoryDB.push(this.objectEventFactory.constructCreateTaskEvent('Magma','In Work'));
+  constructor(private httpClient: HttpClient) {
   }
 
   public storeObjectEvent(objectEvent: ObjectEvent): void {
-      this.inMemoryDB.push(objectEvent);
+    console.log('storing event:');
+    console.log(objectEvent);
+    const asJSON = {
+      topic:objectEvent.topic,
+      time:objectEvent.time,
+      id: objectEvent.id,
+      eventType: objectEvent.eventType,
+      object: objectEvent.object,
+      objectType: objectEvent.objectType,
+      payload: objectEvent.payload
+    };
+    this.httpClient.post('http://localhost:8000/objectEvent',asJSON).subscribe(
+      (response)=> console.log(response),
+      (error)=> console.log(error));
   }
 
-  public getAllObjectEventsOfTopic(topic: string): ObjectEvent[] {
-    return this.inMemoryDB;
+  public getAllObjectEventsOfTopic(topic: string): Observable<ObjectEvent[]> {
+    return this.httpClient.get<ObjectEvent[]>(`http://localhost:8000/objectEvent?topic=`+topic);
   }
 }

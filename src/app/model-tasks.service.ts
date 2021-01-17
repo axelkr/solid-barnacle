@@ -21,8 +21,7 @@ export class ModelTasksService {
 
     availableProcessors.forEach(aService => this.processors.set(aService.objectEventTypeProcessing,aService));
 
-    const allEvents = backend.getAllObjectEventsOfTopic(this.objectEventFactory.currentTopic);
-    allEvents.forEach(x => this.processObjectEvent(x));
+    backend.getAllObjectEventsOfTopic(this.objectEventFactory.currentTopic).subscribe(x=>x.forEach(a=>this.processObjectEvent(a)));
   }
 
   getTasks(): Observable<Task[]> {
