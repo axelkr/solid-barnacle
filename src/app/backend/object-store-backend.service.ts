@@ -37,7 +37,6 @@ export class ObjectStoreBackendService {
   }
 
   public getAllObjectEventsOfTopic(topic: string): Observable<ObjectEvent[]> {
-    // TODO: handle case that server is initially not available
     const allObjectEvents: Observable<ObjectEventBackEnd[]> =  this.httpClient.get<any[]>(`http://localhost:8000/objectEvent?topic=`+topic);
     return map(this.deserializeServerObjectEvent)(allObjectEvents);
   }
