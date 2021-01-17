@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 
 import { ObjectEvent } from '../objectEvent';
+import { map } from 'rxjs/operators';
+
+
+type ObjectEventBackEnd = {topic: string;
+  time: string;
+  id: number;
+  eventType: string;
+  object: string;
+  objectType: string;
+  payload: string;};
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +25,40 @@ export class ObjectStoreBackendService {
   }
 
   public storeObjectEvent(objectEvent: ObjectEvent): void {
-    console.log('storing event:');
-    console.log(objectEvent);
     const asJSON = {
       topic:objectEvent.topic,
-      time:objectEvent.time,
-      id: objectEvent.id,
       eventType: objectEvent.eventType,
       object: objectEvent.object,
       objectType: objectEvent.objectType,
-      payload: objectEvent.payload
+      payload: JSON.stringify(Array.from(objectEvent.payload.entries()))
     };
-    this.httpClient.post('http://localhost:8000/objectEvent',asJSON).subscribe(
+    const headers = { 'content-type': 'application/json'};
+    this.httpClient.post('http://localhost:8000/objectEvent',JSON.stringify(asJSON),{headers}).subscribe(
       (response)=> console.log(response),
       (error)=> console.log(error));
   }
 
   public getAllObjectEventsOfTopic(topic: string): Observable<ObjectEvent[]> {
-    return this.httpClient.get<ObjectEvent[]>(`http://localhost:8000/objectEvent?topic=`+topic);
+    // TODO: handle case that server is initially not available
+    const allObjectEvents: Observable<ObjectEventBackEnd[]> =  this.httpClient.get<any[]>(`http://localhost:8000/objectEvent?topic=`+topic);
+    return map(this.deserializeServerObjectEvent)(allObjectEvents);
+  }
+
+  private deserializeServerObjectEvent(jsonBackend: ObjectEventBackEnd[]): ObjectEvent[] {
+    const results: ObjectEvent[] = [];
+    jsonBackend.forEach(json => {
+      const result: ObjectEvent = {
+        topic:json.topic,
+        payload : new Map(JSON.parse(json.payload)),
+        time : new Date(json.time),
+        id : json.id,
+        eventType : json.eventType,
+        object : json.object,
+        objectType : json.objectType
+      };
+    console.log(JSON.stringify(result));
+    results.push(result);
+    });
+    return results;
   }
 }
