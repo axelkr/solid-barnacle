@@ -33,9 +33,7 @@ export class ObjectStoreBackendService {
       payload: JSON.stringify(Array.from(objectEvent.payload.entries()))
     };
     const headers = { 'content-type': 'application/json'};
-    this.httpClient.post('http://localhost:8000/objectEvent',JSON.stringify(asJSON),{headers}).subscribe(
-      (response)=> console.log(response),
-      (error)=> console.log(error));
+    this.httpClient.post('http://localhost:8000/objectEvent',JSON.stringify(asJSON),{headers}).subscribe();
   }
 
   public getAllObjectEventsOfTopic(topic: string): Observable<ObjectEvent[]> {
@@ -56,8 +54,7 @@ export class ObjectStoreBackendService {
         object : json.object,
         objectType : json.objectType
       };
-    console.log(JSON.stringify(result));
-    results.push(result);
+      results.push(result);
     });
     return results;
   }
