@@ -47,7 +47,7 @@ export class ObjectStoreBackendService {
     jsonBackend.forEach(json => {
       const result: ObjectEvent = {
         topic:json.topic,
-        payload : new Map(JSON.parse(json.payload)),
+        payload : new Map<string,string>(JSON.parse(json.payload)),
         time : new Date(json.time),
         id : json.id,
         eventType : json.eventType,
