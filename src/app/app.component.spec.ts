@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -10,7 +11,8 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,

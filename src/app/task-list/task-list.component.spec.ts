@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TaskComponent } from '../task/task.component';
 import { TaskListComponent } from './task-list.component';
@@ -14,7 +15,8 @@ describe('TaskListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TaskListComponent,TaskComponent,TaskAddComponent ],
       imports: [
-        FormsModule
+        FormsModule,
+        HttpClientModule
       ]
     })
     .compileComponents();
