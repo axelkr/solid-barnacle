@@ -33,7 +33,7 @@ describe('ProcessCreateTaskService', () => {
     expect(afterProcessingEventTwice.length).toEqual(inputTasks.length+1);
   });
 
-  it('should apply CreateTaskEvent if not yet created', () => {
+  it('should apply CreateTaskEvent if task id is not yet available', () => {
     const inputTasks: Task[] = [];
     const aCreateTaskEvent: ObjectEvent = {
       topic: 'aTopic',

@@ -12,6 +12,7 @@ export class ProcessCreateTaskService implements ProcessObjectEventService {
   constructor() { }
 
   process(objectEvent: ObjectEvent, tasks: Task[]): Task[] {
+    const result = [...tasks];
     let name = objectEvent.payload.get('name');
     if (name === undefined) {
       name = '';
@@ -21,9 +22,9 @@ export class ProcessCreateTaskService implements ProcessObjectEventService {
       state = '';
     }
     if ( ! this.objectAlreadyCreated(tasks,objectEvent.object)) {
-      tasks.push({id:objectEvent.object,name,state});
+      result.push({id:objectEvent.object,name,state});
     }
-    return tasks;
+    return result;
   }
 
   private objectAlreadyCreated(tasks: Task[], objectId: string): boolean {
