@@ -11,7 +11,6 @@ export class ProcessCreateTaskService implements ProcessObjectEventService {
 
   constructor() { }
 
-
   process(objectEvent: ObjectEvent, tasks: Task[]): Task[] {
     let name = objectEvent.payload.get('name');
     if (name === undefined) {
@@ -21,7 +20,19 @@ export class ProcessCreateTaskService implements ProcessObjectEventService {
     if (state === undefined) {
       state = '';
     }
-    tasks.push({id:objectEvent.object,name,state});
+    if ( ! this.objectAlreadyCreated(tasks,objectEvent.object)) {
+      tasks.push({id:objectEvent.object,name,state});
+    }
     return tasks;
+  }
+
+  private objectAlreadyCreated(tasks: Task[], objectId: string): boolean {
+    let alreadyCreated = false;
+    tasks.forEach(aTask => {
+      if ( aTask.id === objectId) {
+        alreadyCreated = true;
+      }
+    });
+    return alreadyCreated;
   }
 }

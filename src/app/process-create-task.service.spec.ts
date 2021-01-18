@@ -32,4 +32,19 @@ describe('ProcessCreateTaskService', () => {
     const afterProcessingEventTwice = service.process(aCreateTaskEvent,afterProcessingEventOnce);
     expect(afterProcessingEventTwice.length).toEqual(inputTasks.length+1);
   });
+
+  it('should apply CreateTaskEvent if not yet created', () => {
+    const inputTasks: Task[] = [];
+    const aCreateTaskEvent: ObjectEvent = {
+      topic: 'aTopic',
+      time: new Date(),
+      id: 23,
+      eventType: service.objectEventTypeProcessing,
+      object: 'asda_asda_asdads',
+      objectType: 'objectType',
+      payload: new Map<string,string>([['name','name'],['state','state']])
+    };
+    const afterProcessingEventOnce = service.process(aCreateTaskEvent,inputTasks);
+    expect(afterProcessingEventOnce.length).toEqual(inputTasks.length+1);
+  });
 });
