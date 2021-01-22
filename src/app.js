@@ -13,9 +13,7 @@ const {
   
   const db = new Database("objectEventStore.db");
   const runServer = new Server(db);
-  console.log("yikes???");
   runServer.start(8000);
-  console.log("yikes!!!");
 
   let appWindow
   
