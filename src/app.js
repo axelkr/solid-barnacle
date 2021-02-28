@@ -9,6 +9,12 @@ const {
   const url = require("url");
   const path = require("path");
   
+  const { Server , Database} = require('happy-barnacle');
+  
+  const db = new Database("objectEventStore.db");
+  const runServer = new Server(db);
+  runServer.start(8000);
+
   let appWindow
   
   function initWindow() {
