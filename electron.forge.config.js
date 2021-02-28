@@ -1,13 +1,13 @@
 module.exports = {
     "packagerConfig": {
-      "icon" : "src/assets/applicationIcon",
-      "ignore": ["src/","documentation/","deployment","testResults/",".eslintrc.json",".browserlistrc",".gitignore","karma.conf.js","angular.json"]
+      "icon" : "dist/assets/application_icon_heijunka",
+      "ignore": ["src/","documentation/","deployment","testResults/",".gitignore"]
     },
     "makers": [
       {
         "name": "@electron-forge/maker-squirrel",
         "config": {
-          "name": "KanbanTracking"
+          "name": "Heijunka"
         }
       },
       {

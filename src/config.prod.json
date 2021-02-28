@@ -3,11 +3,11 @@
         "name": "prod"
      },
      "frontend": {
-         "port":4204
+         "port":4206
      },
      "backend": {
          "url" : "http://localhost",
-         "port":8123
+         "port":8125
      },
      "title":"Heijunka"
 }
