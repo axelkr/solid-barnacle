@@ -38,13 +38,6 @@
           "environment_variables": [],
           "tabs": [],
           "resources": [],
-          "artifacts": [
-            {
-              "source": "testResults/**/TESTS-*.xml",
-              "destination": "testoutput",
-              "type": "test"
-            }
-          ],
           "timeout": 0.0,
           "tasks": [
             {
@@ -62,26 +55,6 @@
               "arguments": [
                 "run",
                 "build"
-              ],
-              "run_if": "passed",
-              "type": "exec"
-            },
-            {
-              "command": "npm",
-              "timeout": -1.0,
-              "arguments": [
-                "run",
-                "testCLI"
-              ],
-              "run_if": "passed",
-              "type": "exec"
-            },
-            {
-              "command": "npm",
-              "timeout": -1.0,
-              "arguments": [
-                "run",
-                "lint"
               ],
               "run_if": "passed",
               "type": "exec"
