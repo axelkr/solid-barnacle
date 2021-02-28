@@ -5,11 +5,12 @@
   "main": "dist/app.js",
   "scripts": {
     "electron": "node_modules/electron/dist/electron",
-    "start": "npm run build && node_modules/electron/dist/electron dist/app.js",
-    "make": "npm run build &&  && electron-forge make",
+    "start": "electron-forge start",
+    "make": "electron-forge make",
     "build": "cpx 'node_modules/eximious-barnacle/dist/*' dist/ && cpx 'node_modules/eximious-barnacle/dist/assets/**/*' dist/assets && cpx src/config.prod.json dist/assets/config/ && cpx src/app.js dist/",
-    "rebuild": "node_modules/.bin/electron-rebuild"
-
+    "rebuild": "node_modules/.bin/electron-rebuild",
+    "package": "electron-forge package",
+    "make-linux": "npx @electron-forge/cli make --platform linux"
   },
   "files": [
     "/dist/"
@@ -21,17 +22,22 @@
   "keywords": [],
   "author": "Axel",
   "license": "GPL-3.0",
-  "dependencies": {
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "better-sqlite3": "^7.1.2",
-    "electron-squirrel-startup": "^1.0.0",
+    "cpx": "^1.5.0",
+    "electron": "^11.3.0",
+    "electron-rebuild": "^2.3.5",
     "eximious-barnacle": "^2.8.5",
     "express": "^4.17.1",
     "happy-barnacle": "^3.0.1"
   },
-  "devDependencies": {
-    "cpx": "^1.5.0",
-    "electron": "^11.3.0",
-    "electron-rebuild": "^2.3.5"
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
     "forge": "./electron.forge.config.js"
