@@ -2,7 +2,7 @@
   "name": "solid-barnacle",
   "version": "0.1.0",
   "description": "some description.",
-  "main": "dist/app.js",
+  "main": "app.js",
   "scripts": {
     "electron": "node_modules/electron/dist/electron",
     "start": "electron-forge start",
