@@ -33,7 +33,7 @@
     "express": "^4.17.1"
   },
   "dependencies": {
-    "happy-barnacle": "^3.0.2",
+    "happy-barnacle": "^3.0.3",
     "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
