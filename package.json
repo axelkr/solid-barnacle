@@ -38,7 +38,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "dist/assets/icons/favicon.png",
+        "ignore": ["documentation/","deployment/","testResults/",".gitignore"]},
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -48,9 +50,15 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "options": {
+              "icon":"dist/assets/icons/favicon.png",
+              "categories":["Office"]
+            }
+          }
         }
-      ]
+      ],
+      "executableName": "SolidBarnacle"
     }
   }
 }
