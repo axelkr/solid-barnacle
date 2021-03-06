@@ -1,16 +1,15 @@
 {
   "name": "solid-barnacle",
   "version": "0.1.0",
-  "description": "some description.",
-  "main": "app.js",
+  "description": "Heijunka board",
+  "main": "dist/app.js",
   "scripts": {
-    "electron": "node_modules/electron/dist/electron",
-    "start": "electron-forge start",
-    "make": "electron-forge make",
     "build": "cpx 'node_modules/eximious-barnacle/dist/*' dist/ && cpx 'node_modules/eximious-barnacle/dist/assets/**/*' dist/assets && cpx src/config.prod.json dist/assets/config/ && cpx src/app.js dist/",
-    "rebuild": "node_modules/.bin/electron-rebuild",
+    "rebuild": "npm rebuild --build-from-source better-sqlite3",
+    "start": "electron-forge start",
     "package": "electron-forge package",
-    "make-linux": "npx @electron-forge/cli make --platform linux"
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "files": [
     "/dist/"
@@ -25,21 +24,33 @@
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "better-sqlite3": "^7.1.2",
+    "electron": "12.0.0",
+    "eximious-barnacle": "^3.0.1",
     "cpx": "^1.5.0",
-    "electron": "^11.3.0",
-    "electron-rebuild": "^2.3.5",
-    "eximious-barnacle": "^2.8.5",
-    "express": "^4.17.1",
-    "happy-barnacle": "^3.0.1"
+    "node-gyp": "^7.1.2",
+    "express": "^4.17.1"
   },
   "dependencies": {
+    "happy-barnacle": "^3.0.2",
     "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
-    "forge": "./electron.forge.config.js"
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "Heijunka"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        }
+      ]
+    }
   }
 }
