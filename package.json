@@ -51,7 +51,9 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "Heijunka"
+            "name": "Heijunka",
+            "iconURL": "dist/assets/icons/application_icon_heijunka_large.ico",
+            "setupIcon": "dist/assets/icons/application_icon_heijunka_large.ico"
           }
         },
         {
