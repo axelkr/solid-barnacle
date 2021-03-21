@@ -15,13 +15,13 @@ const config = require('./assets/config/config.prod.json');
 const { Server, Database } = require('happy-barnacle');
 
 const homedir = require('os').homedir();
-const appDirectory = path.join(homedir,'.heijunka');
+const appDirectory = path.join(homedir, '.heijunka');
 
-if (!fs.existsSync(appDirectory)){
-    fs.mkdirSync(appDirectory);
+if (!fs.existsSync(appDirectory)) {
+  fs.mkdirSync(appDirectory);
 }
 
-const dbFile = path.join(appDirectory,"objectEventStoreApp.db");
+const dbFile = path.join(appDirectory, "objectEventStoreApp.db");
 
 const db = new Database(dbFile);
 const runServer = new Server(db);
@@ -36,8 +36,9 @@ function initWindow() {
     webPreferences: {
       nodeIntegration: true
     },
-    icon: "dist/assets/application_icon_heijunka"
-  })
+    icon: "dist/assets/application_icon_heijunka",
+  });
+  appWindow.menuBarVisible = false;
 
   // Electron Build Path
   appWindow.loadURL(
