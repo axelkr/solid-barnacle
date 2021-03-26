@@ -1,6 +1,6 @@
 {
   "name": "solid-barnacle",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Heijunka board",
   "main": "dist/app.js",
   "scripts": {
