@@ -30,9 +30,6 @@
     "express": "^4.17.1",
     "node-gyp": "^8.3.0"
   },
-  "resolutions": {
-    "**/node-abi": "^3.2.0"
-  },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "happy-barnacle": "^3.3.2"
